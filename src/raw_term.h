@@ -1,7 +1,19 @@
-void disableRawMode(void);
+/**
+ * Restore terminal to configuriong at start of program
+ */
+void disable_raw_mode(void);
 
-void enableRawMode(void);
+/**
+ * Put terminal in raw mode and resgister disable_raw_mode to be called on exit
+ * */
+void enable_raw_mode(void);
 
-void moveCursor(int dx, int dy);
+/**
+ * Move terminal cursor relative to current position
+ */
+void move_cursor(int dx, int dy);
 
-void clearLine(void);
+/**
+ * clear line from current cursor position to end of line
+ * */
+void clear_line(void);

@@ -20,16 +20,16 @@ struct termios orig_termios;
 
 /*** terminal funcitons ***/
 
-void disableRawMode(void) {
+void disable_raw_mode(void) {
   if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1)
     die("tcsetattr");
 }
 
-void enableRawMode(void) {
+void enable_raw_mode(void) {
   if (tcgetattr(STDIN_FILENO, &orig_termios) == -1)
     die("tcgetattr");
 
-  atexit(disableRawMode);
+  atexit(disable_raw_mode);
 
   struct termios raw = orig_termios;
 
@@ -50,13 +50,13 @@ void enableRawMode(void) {
 
   raw.c_cc[VMIN] =
       0; // set minimum number of bytes needed before read can return to 0
-  raw.c_cc[VTIME] = 0; // set max time to wait for read to return to 0.1s
+  raw.c_cc[VTIME] = 1; // set max time to wait for read to return to 0.1s
 
   if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1)
     die("tcsetattr");
 }
 
-void moveCursor(int dx, int dy) {
+void move_cursor(int dx, int dy) {
   int nwrite, xEscapeWidth, yEscapeWidth, absdx, absdy;
   char *xReposFmt, *yReposFmt, reposStr[10];
 
@@ -102,8 +102,7 @@ void moveCursor(int dx, int dy) {
   }
 }
 
-void clearLine(void) {
-  int nwrite;
+void clear_line(void) {
   if (write(STDOUT_FILENO, "\x1b[K", 3) == -1 && errno != EAGAIN) {
     die("write");
   }

@@ -15,7 +15,6 @@ char *CLOCK_FMT_STRING = "╭──────────╮\r\n"
 void *run(void *durationP) {
   int durationS = *((int *)durationP);
   int hours, minutes, seconds;
-  int expired = 0;
 
   while (durationS > -1 && !is_done()) {
 
@@ -24,7 +23,7 @@ void *run(void *durationP) {
     seconds = (durationS % 60);
     durationS--;
     printf(CLOCK_FMT_STRING, hours, minutes, seconds);
-    moveCursor(0, -3);
+    move_cursor(0, -3);
 
     // Wait for 1000ms in increments of 50ms
     for (int i = 0; i < 10; i++) {
