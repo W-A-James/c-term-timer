@@ -24,7 +24,7 @@ duration-parser.test: ./test/build/duration-parser.test test/build
 	gcc $^ $(LIBS) $(DEFINES) $(CFLAGS) -o $@
 
 clean:
-	rm -rf ./build
+	rm -rf ./build ./test/build
 
 ./build/debug/%.o: ./src/%.c ./build/debug/
 	gcc -c $< $(LIBS) $(DEFINES) $(CFLAGS) -o $@
