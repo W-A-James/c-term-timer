@@ -10,11 +10,11 @@ release_objs = ./build/release/raw_term.o ./build/release/clock.o ./build/releas
 
 main = src/main.c
 
-all: raw_term_debug raw_term_release
+all: term-timer_debug term-timer_release
 
-raw_term_debug: ./build/debug/raw_term
+term-timer_debug: ./build/debug/term-timer
 
-raw_term_release: ./build/release/raw_term
+term-timer_release: ./build/release/term-timer
 
 clean:
 	rm -rf ./build
@@ -22,13 +22,13 @@ clean:
 ./build/debug/%.o: ./src/%.c ./build/debug/
 	gcc -c $< $(LIBS) $(DEFINES) $(CFLAGS) -o $@
 
-./build/debug/raw_term: $(objs) $(main)
+./build/debug/term-timer: $(objs) $(main)
 	gcc $^ $(LIBS) $(DEFINES) $(CFLAGS) -o $@
 
 ./build/release/%.o: ./src/%.c ./build/release/
 	gcc -c $< $(LIBS) $(RELEASE_CFLAGS) -o $@
 
-./build/release/raw_term: $(release_objs) $(main)
+./build/release/term-timer: $(release_objs) $(main)
 	gcc $^ $(LIBS) $(RELEASE_CFLAGS) -o $@
 
 build/debug/:
