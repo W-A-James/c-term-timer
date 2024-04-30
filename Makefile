@@ -10,11 +10,18 @@ release_objs = ./build/release/raw_term.o ./build/release/clock.o ./build/releas
 
 main = src/main.c
 
-all: term-timer_debug term-timer_release
+all: term-timer_debug term-timer_release duration-parser.test
+
+test: duration-parser.test
 
 term-timer_debug: ./build/debug/term-timer
 
 term-timer_release: ./build/release/term-timer
+
+duration-parser.test: ./test/build/duration-parser.test test/build
+
+./test/build/%.test: ./test/%.test.c $(objs)
+	gcc $^ $(LIBS) $(DEFINES) $(CFLAGS) -o $@
 
 clean:
 	rm -rf ./build
@@ -36,3 +43,6 @@ build/debug/:
 
 build/release/:
 	mkdir -p ./build/release
+
+test/build:
+	mkdir -p ./test/build
