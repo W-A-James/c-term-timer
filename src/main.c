@@ -17,6 +17,13 @@
  */
 #define CTRL_KEY(k) ((k)&0x1f)
 
+const char *USAGE =
+    "Usage:\n"
+    "    term-timer [<hours>h] [<minutes>m] [<seconds>s?]\n"
+    "    Must specify at least one of [<hours>h], [<minutes>m], [<seconds>s?]\n"
+    "    If only one argument is specified with no suffix, defaults to "
+    "interpreting as seconds\n";
+
 char read_key() {
   int nread;
   char c;
@@ -50,9 +57,15 @@ void *process_input(void *_) {
 }
 
 int main(int argc, char **argv) {
+  if (argc < 2) { // No time specifier given
+    fprintf(stderr, "Must specify duration\n");
+    printf("%s\n", USAGE);
+    exit(1);
+  }
+
   int duration_s = parse_duration(argc - 1, argv + 1);
   if (duration_s < 0)
-    handle_error(duration_s);
+    handle_parse_error(duration_s, USAGE);
 
   enable_raw_mode();
   init_done(done);

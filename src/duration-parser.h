@@ -19,4 +19,4 @@ int parse_duration(int len, char **args);
 /**
  * Prints message corresponding to values in PARSE_ERROR enum and exits program
  */
-void handle_error(enum PARSE_ERROR errcode);
+void handle_parse_error(enum PARSE_ERROR errcode, const char *msg);

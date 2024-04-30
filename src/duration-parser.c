@@ -80,7 +80,7 @@ int parse_duration(int len, char **args) {
   return durationS;
 }
 
-void handle_error(enum PARSE_ERROR errcode) {
+void handle_parse_error(enum PARSE_ERROR errcode, const char *msg) {
   switch (errcode) {
   case DUPLICATE_HOURS_SPEC_ERR:
     fprintf(stderr, "Found duplicate hour specifier\n");
@@ -99,6 +99,7 @@ void handle_error(enum PARSE_ERROR errcode) {
     break;
   }
 
+  printf("%s", msg);
   exit(1);
 }
 #endif

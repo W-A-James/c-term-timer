@@ -16,7 +16,7 @@ void *run(void *durationP) {
   int durationS = *((int *)durationP);
   int hours, minutes, seconds;
 
-  while (durationS > -1 && !is_done()) {
+  while (durationS > 0 && !is_done()) {
 
     hours = durationS / 3600;
     minutes = (durationS % 3600) / 60;
@@ -34,7 +34,7 @@ void *run(void *durationP) {
     }
   }
 
-  if (durationS == -1) { // Timer expired
+  if (durationS == 0) { // Timer expired
     printf("\x07");
     set_done();
   }
