@@ -10,7 +10,7 @@ release_objs = ./build/release/raw_term.o ./build/release/clock.o ./build/releas
 
 main = src/main.c
 
-all: term-timer_debug term-timer_release duration-parser.test
+all: term-timer_debug term-timer_release duration-parser.test clock.test
 
 test: duration-parser.test clock.test
 
