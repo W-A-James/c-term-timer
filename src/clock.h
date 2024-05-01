@@ -1,1 +1,1 @@
-void *run(void *args);
+void *clock_run(void *args);

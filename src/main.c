@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
   // Start clock thread and input processing thread
   pthread_t clock_thread, input_processing_thread;
 
-  pthread_create(&clock_thread, NULL, run, (void *)&duration_s);
+  pthread_create(&clock_thread, NULL, clock_run, (void *)&duration_s);
   pthread_create(&input_processing_thread, NULL, process_input, NULL);
 
   pthread_join(clock_thread, NULL);

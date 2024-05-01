@@ -12,7 +12,7 @@ char *CLOCK_FMT_STRING = "╭──────────╮\r\n"
                          "│ %02d:%02d:%02d │\r\n"
                          "╰──────────╯\r\n";
 
-void *run(void *durationP) {
+void *clock_run(void *durationP) {
   int durationS = *((int *)durationP);
   int hours, minutes, seconds;
 

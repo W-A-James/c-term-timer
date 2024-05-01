@@ -34,6 +34,11 @@ int is_done();
 void set_done();
 
 /**
+ * Blocks trying to acquire lock on done struct and marks the program as not ending
+ */
+void clear_done();
+
+/**
  * calls perror with provided argument and exits process with exit code 1
  * */
 void die(const char *s);

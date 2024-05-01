@@ -40,4 +40,10 @@ void set_done() {
   pthread_mutex_unlock(&done.lock);
 }
 
+void clear_done() {
+  pthread_mutex_lock(&done.lock);
+  done.done = 0;
+  pthread_mutex_unlock(&done.lock);
+}
+
 #endif
