@@ -18,9 +18,9 @@ term-timer_debug: ./build/debug/term-timer
 
 term-timer_release: ./build/release/term-timer
 
-duration-parser.test: ./test/build/duration-parser.test test/build
+duration-parser.test: test/build ./test/build/duration-parser.test 
 
-clock.test: ./test/build/clock.test test/build
+clock.test: test/build ./test/build/clock.test 
 
 
 ./test/build/%.test: ./test/%.test.c $(objs)
