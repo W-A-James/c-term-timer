@@ -5,7 +5,6 @@
 
 #include "./common.h"
 
-#include <ctype.h>
 #include <errno.h>
 #include <math.h>
 #include <stdio.h>

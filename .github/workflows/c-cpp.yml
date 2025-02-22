@@ -13,9 +13,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: make
-      run: make
-    - name: run tests
-      run: |
-        ./test/build/clock.test
-        ./test/build/duration-parser.test
+    - name: make and run tests
+      run: make test

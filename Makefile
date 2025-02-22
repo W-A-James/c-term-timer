@@ -13,6 +13,8 @@ main = src/main.c
 all: term-timer_debug term-timer_release duration-parser.test clock.test
 
 test: duration-parser.test clock.test
+	./test/build/duration-parser.test
+	./test/build/clock.test
 
 term-timer_debug: ./build/debug/term-timer
 

@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+#define RED(s) "\x1b[41m" s "\x1b[0m"
+#define GREEN(s) "\x1b[42m" s "\x1b[0m"
+
 #define START_SUITE(suite_name)                                                \
   int tests_passed = 0, tests_failed = 0, tests_total = 0;                     \
   printf("Test Suite ---- %s\n", (suite_name));
@@ -11,12 +14,12 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) != (expected)) {                                              \
-      printf("\x1b[41mFailed\x1b[0m\n");                                       \
-      printf("\t\x1b[41mGot %d\x1b[0m, \x1b[42mExpected %d\x1b[0m\n\n",        \
-             (actual), (expected));                                            \
+      printf(RED("Failed") "\n");                                              \
+      printf("\t" RED("Got %d") ", " GREEN("Expected %d") "\n\n", (actual),    \
+             (expected));                                                      \
       tests_failed++;                                                          \
     } else {                                                                   \
-      printf("\x1b[42mPassed\x1b[0m\n\n");                                     \
+      printf(GREEN("Passed\n\n"));                                             \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \
@@ -26,12 +29,12 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) > (expected + error) || (actual) < (expected - error)) {      \
-      printf("\x1b[41mFailed\x1b[0m\n");                                       \
-      printf("\t\x1b[41mGot %d\x1b[0m, \x1b[42mExpected %d +/- %d\x1b[0m\n\n", \
+      printf(RED("Failed") "\n");                                              \
+      printf("\t" GREEN("Got %d") ", " RED("Expected %d +/- %d\n\n"),          \
              (actual), (expected), (error));                                   \
       tests_failed--;                                                          \
     } else {                                                                   \
-      printf("\x1b[42mPassed\x1b[0m\n\n");                                     \
+      printf(GREEN("Passed\n\n"));                                             \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \
@@ -41,11 +44,11 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) > (expected + error) || (actual) < (expected - error)) {      \
-      printf("\x1b[41mFailed\x1b[0m\n");                                       \
-      printf("\t\x1b[41mGot %f\x1b[0m, \x1b[42mExpected %f +/- %f\x1b[0m\n\n", \
+      printf(RED("Failed\n"));                                                 \
+      printf("\t" GREEN("Got %f")", " RED("Expected %f +/- %f\n\n"),           \
              (actual), (expected), (error));                                   \
     } else {                                                                   \
-      printf("\x1b[42mPassed\x1b[0m\n\n");                                     \
+      printf(GREEN("Passed\n\n"));                                             \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \

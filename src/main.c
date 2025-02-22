@@ -3,7 +3,6 @@
 #include "./duration-parser.h"
 #include "./raw_term.h"
 
-#include <ctype.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
