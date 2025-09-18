@@ -3,6 +3,7 @@
 #include "./clock.h"
 #include "./common.h"
 #include "./raw_term.h"
+#include "./play_sound.h"
 
 #include <pthread.h>
 #include <stdio.h>
@@ -35,7 +36,7 @@ void *clock_run(void *durationP) {
   }
 
   if (durationS == 0) { // Timer expired
-    printf("\x07");
+    play_sound();
     set_done();
   }
   return NULL;

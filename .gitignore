@@ -1,1 +1,4 @@
 build
+*.gen.h
+.cache
+compile_commands.json

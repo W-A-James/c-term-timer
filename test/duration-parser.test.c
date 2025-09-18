@@ -1,7 +1,6 @@
 #include "../src/duration-parser.h"
 
 #include "./common.h"
-#include <stdio.h>
 
 char *hours_mins_secs[3] = {"2h", "5m", "3s"};
 char *hours_mins[2] = {"2h", "3m"};

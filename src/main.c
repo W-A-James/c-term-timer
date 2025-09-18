@@ -2,6 +2,7 @@
 #include "./common.h"
 #include "./duration-parser.h"
 #include "./raw_term.h"
+#include "./play_sound.h"
 
 #include <errno.h>
 #include <pthread.h>
@@ -62,14 +63,17 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
+
   int duration_s = parse_duration(argc - 1, argv + 1);
   if (duration_s < 0)
     handle_parse_error(duration_s, USAGE);
 
   enable_raw_mode();
-  init_done(done);
+  init_done();
   // Start clock thread and input processing thread
   pthread_t clock_thread, input_processing_thread;
+
+  load_sound();
 
   pthread_create(&clock_thread, NULL, clock_run, (void *)&duration_s);
   pthread_create(&input_processing_thread, NULL, process_input, NULL);
@@ -77,6 +81,7 @@ int main(int argc, char **argv) {
   pthread_join(clock_thread, NULL);
   pthread_join(input_processing_thread, NULL);
 
-  free_done(done);
+  free_sound();
+  free_done();
   return 0;
 }

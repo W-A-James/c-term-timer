@@ -11,14 +11,14 @@ void die(const char *s) {
   exit(1);
 }
 
-void init_done() {
+void init_done(void) {
   done.done = 0;
 
   pthread_mutex_init(&done.lock, NULL);
   done.done = 0;
 }
 
-void free_done() {
+void free_done(void) {
   pthread_mutex_lock(&done.lock);
   pthread_mutex_unlock(&done.lock);
 

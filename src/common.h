@@ -15,18 +15,18 @@ extern Done_t done;
 /**
  * initialize done struct
  */
-void init_done();
+void init_done(void);
 
 /**
  * frees resources captured by initialized done struct
  */
-void free_done();
+void free_done(void);
 
 /**
  * blocks trying to acquire lock on done struct and returns whether or not the
  * program is ending
  * */
-int is_done();
+int is_done(void);
 
 /**
  * Blocks trying to acquire lock on done struct and marks the program as ending
