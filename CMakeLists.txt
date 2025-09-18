@@ -6,50 +6,58 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+set(SOUND_DIR "${PROJECT_SOURCE_DIR}/sounds")
+set(SCRIPT_DIR "${PROJECT_SOURCE_DIR}/scripts")
+set(SRC_DIR   "${PROJECT_SOURCE_DIR}/src")
+set(TEST_DIR  "${PROJECT_SOURCE_DIR}/test")
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-add_custom_command(
-  PRE_BUILD
-  OUTPUT src/sound.gen.h
-  COMMAND ${PROJECT_SOURCE_DIR}/scripts/read_wav_to_bytes.py
-  ${PROJECT_SOURCE_DIR}/src/sfx_alarm_loop6.wav ${PROJECT_SOURCE_DIR}/src/sound.gen.h
-  DEPENDS src/sfx_alarm_loop6.wav
-)
-
+# Add vendored libraries
 add_subdirectory(vendored/CSFML-2.6.1 EXCLUDE_FROM_ALL)
 
-add_executable(term-timer 
-  src/main.c
-  src/common.c
-  src/clock.c
-  src/duration-parser.c
-  src/raw_term.c
-  src/play_sound.c
-  src/sound.gen.h
+file(GLOB SRC_FILES ${SRC_DIR}/*.c ${SRC_DIR}/sound.gen.h)
+
+
+set(CLOCK_TEST_SRC 
+  ${TEST_DIR}/clock.test.c
+  ${TEST_DIR}/common.h
+  ${SRC_DIR}/clock.c
+  ${SRC_DIR}/common.c
+  ${SRC_DIR}/raw_term.c
+  ${SRC_DIR}/play_sound.c
 )
 
-add_executable(duration-parser.test
-   src/duration-parser.c
-   test/duration-parser.test.c
-   test/common.h
+set(DURATION_PARSER_TEST_SRC
+   ${TEST_DIR}/duration-parser.test.c
+   ${TEST_DIR}/common.h
+   ${SRC_DIR}/duration-parser.c
 )
 
-add_executable(clock.test
-  src/clock.c
-  src/common.c
-  src/raw_term.c
-  src/play_sound.c
-  test/clock.test.c
-  test/common.h
-)
-
-target_link_libraries(clock.test PRIVATE
+set(REQUIRED_LIBS 
+  Threads::Threads
   m
   csfml-audio
 )
 
-target_link_libraries(term-timer PRIVATE
-                      Threads::Threads
-                      m
-                      csfml-audio)
+# Generate src/sound.gen.h
+add_custom_command(
+  PRE_BUILD
+  OUTPUT ${SRC_DIR}/sound.gen.h
+  COMMAND ${SCRIPT_DIR}/read_wav_to_bytes.py ${SOUND_DIR}/sfx_alarm_loop6.wav ${SRC_DIR}/sound.gen.h
+  DEPENDS ${SOUND_DIR}/sfx_alarm_loop6.wav
+)
+
+# Main
+add_executable(term-timer 
+  ${SRC_FILES}
+)
+target_link_libraries(term-timer PRIVATE ${REQUIRED_LIBS}) 
+
+# TESTS
+add_executable(duration-parser.test ${DURATION_PARSER_TEST_SRC})
+
+add_executable(clock.test ${CLOCK_TEST_SRC})
+target_link_libraries(clock.test PRIVATE ${REQUIRED_LIBS})
+
