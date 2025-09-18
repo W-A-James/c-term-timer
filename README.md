@@ -6,14 +6,19 @@ This port was written to give a more responsive terminal experience. This port c
 ## Features
 
 - Simple terminal-based UI
-- Alarm sound using native terminal bell
+- Alarm sound using CSFML
+
+## Dependencies
+
+- libsfml-dev 2.6.1 
 
 ## Installation
 
 ```bash
 git clone git@github.com:W-A-James/c-term-timer.git
 cd c-term-timer
-make -j
+cmake -B build
+cmake --build build
 ```
 Feel free to add a soft-link to the `./build/release/term-timer` binary to a directory in your `$PATH` or add the `./build/release` directory directly to your `$PATH`.
 
@@ -39,4 +44,7 @@ $ term-timer 5m
 
 ## Tests
 
-After building the binaries in the installation step, the test binaries will live in `./test/build`.
+After building the binaries in the installation step, the test binaries are as follows:
+
+* `build/clock.test`
+* `build/duration-parser.test`
