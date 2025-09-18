@@ -8,10 +8,15 @@ on:
 
 jobs:
   build:
-
-    runs-on: [ubuntu-latest, macos-latest]
+    runs-on: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v4
-    - name: make and run tests
-      run: make test
+    - name: install dependencies
+      run: sudo apt install libsfml-dev
+    - name: configure build 
+      run: cmake -B build
+    - name: run build
+      run: cmake --build build
+    - name: run tests
+      run: ./build/clock.test && ./build/duration-parser.test
