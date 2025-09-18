@@ -17,7 +17,7 @@ find_package(Threads REQUIRED)
 # Add vendored libraries
 add_subdirectory(vendored/CSFML-2.6.1 EXCLUDE_FROM_ALL)
 
-file(GLOB SRC_FILES ${SRC_DIR}/*.c ${SRC_DIR}/sound.gen.h)
+file(GLOB SRC_FILES ${SRC_DIR}/*.c)
 
 
 set(CLOCK_TEST_SRC 
@@ -41,6 +41,11 @@ set(REQUIRED_LIBS
   csfml-audio
 )
 
+# Main
+add_executable(term-timer 
+  ${SRC_FILES}
+  ${SRC_DIR}/sound.gen.h # need to list it directly because the glob won't find it
+)
 # Generate src/sound.gen.h
 add_custom_command(
   PRE_BUILD
@@ -49,10 +54,6 @@ add_custom_command(
   DEPENDS ${SOUND_DIR}/sfx_alarm_loop6.wav
 )
 
-# Main
-add_executable(term-timer 
-  ${SRC_FILES}
-)
 target_link_libraries(term-timer PRIVATE ${REQUIRED_LIBS}) 
 
 # TESTS
