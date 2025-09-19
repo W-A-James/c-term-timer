@@ -25,7 +25,7 @@ void free_done(void) {
   pthread_mutex_destroy(&done.lock);
 }
 
-int is_done() {
+int is_done(void) {
   int is_done;
   pthread_mutex_lock(&done.lock);
   is_done = done.done;
@@ -34,13 +34,13 @@ int is_done() {
   return is_done;
 }
 
-void set_done() {
+void set_done(void) {
   pthread_mutex_lock(&done.lock);
   done.done = 1;
   pthread_mutex_unlock(&done.lock);
 }
 
-void clear_done() {
+void clear_done(void) {
   pthread_mutex_lock(&done.lock);
   done.done = 0;
   pthread_mutex_unlock(&done.lock);

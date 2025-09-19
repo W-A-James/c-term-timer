@@ -31,12 +31,12 @@ int is_done(void);
 /**
  * Blocks trying to acquire lock on done struct and marks the program as ending
  */
-void set_done();
+void set_done(void);
 
 /**
  * Blocks trying to acquire lock on done struct and marks the program as not ending
  */
-void clear_done();
+void clear_done(void);
 
 /**
  * calls perror with provided argument and exits process with exit code 1

@@ -24,7 +24,7 @@ const char *USAGE =
     "    If only one argument is specified with no suffix, defaults to "
     "interpreting as seconds\n";
 
-char read_key() {
+char read_key(void) {
   int nread;
   char c;
 
@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
 
   load_sound();
 
-  pthread_create(&clock_thread, NULL, clock_run, (void *)&duration_s);
+  pthread_create(&clock_thread, NULL, clock_run, (void *)&args);
   pthread_create(&input_processing_thread, NULL, process_input, NULL);
 
   pthread_join(clock_thread, NULL);

@@ -6,6 +6,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_compile_options(-Wall -Wpedantic -Wextra)
+
+if(DEFINED ENV{DEBUG})
+  message("Building with debug")
+  add_compile_options(-g -ggdb -O0)
+else()
+  add_compile_options(-O3)
+endif()
+
 set(SOUND_DIR "${PROJECT_SOURCE_DIR}/sounds")
 set(SCRIPT_DIR "${PROJECT_SOURCE_DIR}/scripts")
 set(SRC_DIR   "${PROJECT_SOURCE_DIR}/src")
