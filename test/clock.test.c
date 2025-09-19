@@ -24,30 +24,29 @@ double diff(struct timeval start, struct timeval end) {
   return (double)diff_sec + ((double)diff_usec) / 1000000.0;
 }
 
-int main(int argc, char **argv) {
-  struct timeval start, end;
-  double difference;
-  int duration = 1;
+struct timeval start, end;
+double difference;
+int duration = 1;
 
-  char name[20];
+char name[20];
 
-  START_SUITE("clock")
+START_SUITE("clock")
 
-  for (int i = 1; i <= 10; i++) {
-    // when run with 1s, has 0.05s accuracy
-    gettimeofday(&start, NULL);
-    clock_run((void *)&duration);
-    gettimeofday(&end, NULL);
+for (int i = 1; i <= 10; i++) {
+  ClockArgs_T args = {.durationS = duration, .useSound = 0, .useDisplay = 0};
+  // when run with 1s, has 0.05s accuracy
+  gettimeofday(&start, NULL);
+  clock_run((void *)&args);
+  gettimeofday(&end, NULL);
 
-    printf("\n\n\n\n");
-    clear_done();
+  printf("\n\n\n\n");
+  clear_done();
 
-    difference = diff(start, end);
+  difference = diff(start, end);
 
-    memset(&name, 0, 20);
-    sprintf(name, "Clock accuracy %d", i);
-    ASSERT_DOUBLE_BETWEEN(difference, 1.0, 0.05, name)
-  }
-
-  END_SUITE()
+  memset(&name, 0, 20);
+  sprintf(name, "Clock accuracy %d", i);
+  ASSERT_DOUBLE_BETWEEN(difference, 1.0, 0.05, name)
 }
+
+END_SUITE()

@@ -1,8 +1,8 @@
 #include "./clock.h"
 #include "./common.h"
 #include "./duration-parser.h"
-#include "./raw_term.h"
 #include "./play_sound.h"
+#include "./raw_term.h"
 
 #include <errno.h>
 #include <pthread.h>
@@ -15,7 +15,7 @@
 /*
  * Convert character to code when ctrl is pressed
  */
-#define CTRL_KEY(k) ((k)&0x1f)
+#define CTRL_KEY(k) ((k) & 0x1f)
 
 const char *USAGE =
     "Usage:\n"
@@ -63,11 +63,11 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-
   int duration_s = parse_duration(argc - 1, argv + 1);
   if (duration_s < 0)
     handle_parse_error(duration_s, USAGE);
 
+  ClockArgs_T args = {.durationS = duration_s, .useSound = 1, .useDisplay = 1};
   enable_raw_mode();
   init_done();
   // Start clock thread and input processing thread
