@@ -3,6 +3,9 @@
 A port of [https://github.com/W-A-James/term-timer](term-timer). Originally written in Typescript for use with Node.js.
 This port was written to give a more responsive terminal experience. This port currently only supports unix-like systems and is currently only tested on an x86 Ubuntu 22.04 machine.
 
+Uses sounds from this [sound
+collection](https://archive.org/details/TheEssentialRetroVideoGameSoundEffectsCollection512Sounds)
+
 ## Features
 
 - Simple terminal-based UI
