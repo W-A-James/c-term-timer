@@ -8,6 +8,7 @@ on:
       - scripts/**/*
       - test/**/*
       - CMakeLists.txt
+      - .github/workflows/c-cpp.yml
   pull_request:
     branches: [ "main" ]
     paths:
@@ -15,6 +16,7 @@ on:
       - scripts/**/*
       - test/**/*
       - CMakeLists.txt
+      - .github/workflows/c-cpp.yml
 
 jobs:
   build:
