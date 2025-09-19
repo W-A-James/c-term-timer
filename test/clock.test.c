@@ -39,7 +39,7 @@ for (int i = 1; i <= 10; i++) {
   clock_run((void *)&args);
   gettimeofday(&end, NULL);
 
-  printf("\n\n\n\n");
+  printf("\n\n");
   clear_done();
 
   difference = diff(start, end);

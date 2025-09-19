@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 
-#define RED(s) "\x1b[41m" s "\x1b[0m"
-#define GREEN(s) "\x1b[42m" s "\x1b[0m"
+#define RED(s) "\033[48;5;1m" s "\033[0m"
+#define GREEN(s) "\033[48;5;2m" s "\033[0m"
 
 #define START_SUITE(suite_name)                                                \
   int main() {                                                                 \
@@ -15,12 +15,14 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) != (expected)) {                                              \
-      printf(RED("Failed") "\n");                                              \
-      printf("\t" RED("Got %d") ", " GREEN("Expected %d") "\n\n", (actual),    \
-             (expected));                                                      \
+      puts(RED("Failed"));                                                     \
+      printf("  Got " RED("%d"), (actual));                                    \
+      printf(", Expected " GREEN("%d"), (expected));                           \
+      puts("");                                                                \
       tests_failed++;                                                          \
     } else {                                                                   \
-      printf(GREEN("Passed") "\n\n");                                          \
+      puts(GREEN("Passed"));                                                   \
+      puts("");                                                                \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \
@@ -30,12 +32,14 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) > (expected + error) || (actual) < (expected - error)) {      \
-      printf(RED("Failed") "\n");                                              \
-      printf("\t" GREEN("Got %d") ", " RED("Expected %d +/- %d") "\n\n",       \
-             (actual), (expected), (error));                                   \
+      puts(RED("Failed"));                                                     \
+      printf("  Got " RED("%d"), (actual));                                    \
+      printf(", Expected " GREEN("%d +/- %d"), (expected), (error));           \
+      puts("");                                                                \
       tests_failed++;                                                          \
     } else {                                                                   \
-      printf(GREEN("Passed") "\n\n"));                                         \
+      puts(GREEN("Passed"));                                                   \
+      puts("");                                                                \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \
@@ -45,11 +49,14 @@
   {                                                                            \
     printf("  %s -- ", (name));                                                \
     if ((actual) > (expected + error) || (actual) < (expected - error)) {      \
-      printf(RED("Failed\n"));                                                 \
-      printf("\t" GREEN("Got %f") ", " RED("Expected %f +/- %f") "\n\n",       \
-             (actual), (expected), (error));                                   \
+      puts(RED("Failed"));                                                     \
+      printf("  Got " RED("%f"), (actual));                                    \
+      printf(", Expected " GREEN("%f +/- %f"), (expected), (error));           \
+      puts("");                                                                \
+      tests_failed++;                                                          \
     } else {                                                                   \
-      printf(GREEN("Passed") "\n\n");                                          \
+      puts(GREEN("Passed"));                                                   \
+      puts("");                                                                \
       tests_passed++;                                                          \
     }                                                                          \
     tests_total++;                                                             \
@@ -57,8 +64,8 @@
 
 #define END_SUITE()                                                            \
   {                                                                            \
-    printf("Tests Passed:\t%d\nTests Failed:\t%d\nTotal:\t%d\n\n",             \
-           tests_passed, tests_failed, tests_total);                           \
+    printf("Tests Passed:\t%d\nTests Failed:\t%d\nTotal:\t%d\n", tests_passed, \
+           tests_failed, tests_total);                                         \
                                                                                \
     if (tests_failed > 0)                                                      \
       return 1;                                                                \
