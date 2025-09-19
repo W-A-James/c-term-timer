@@ -16,7 +16,7 @@ set(TEST_DIR  "${PROJECT_SOURCE_DIR}/test")
 # Modify this to change the default alarm sound
 # This can be overridden by setting the SOUND_FILE environment variable when invoking cmake to
 # generate build files
-set(DEFAULT_ALARM_SOUND "${SOUND_DIR/sfx_lowhealth_alarmloop2.wav}")
+set(DEFAULT_ALARM_SOUND "${SOUND_DIR}/sfx_lowhealth_alarmloop2.wav")
 
 find_package(Threads REQUIRED)
 
@@ -32,9 +32,9 @@ endif()
 
 # Set the sound file
 if(DEFINED ENV{SOUND_FILE})
-  set(SOUND_FILE ${ENV{SOUND_FILE}})
+  set(SOUND_FILE "${ENV{SOUND_FILE}}")
 else()
-  set(SOUND_FILE ${DEFAULT_ALARM_SOUND})
+  set(SOUND_FILE "${DEFAULT_ALARM_SOUND}")
 endif()
 
 message("Using ${SOUND_FILE} as alarm sound")
