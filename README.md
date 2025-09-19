@@ -15,7 +15,7 @@ collection](https://archive.org/details/TheEssentialRetroVideoGameSoundEffectsCo
 
 - libsfml-dev 2.6.1 
 
-## Installation
+## Compiling
 
 ```bash
 git clone git@github.com:W-A-James/c-term-timer.git
@@ -23,7 +23,7 @@ cd c-term-timer
 cmake -B build
 cmake --build build
 ```
-Feel free to add a soft-link to the `./build/release/term-timer` binary to a directory in your `$PATH` or add the `./build/release` directory directly to your `$PATH`.
+Main binary will live at `build/term-timer`.
 
 ## Usage
 
