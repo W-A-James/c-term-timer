@@ -1,6 +1,6 @@
 # C Term Timer [![C/C++ CI](https://github.com/W-A-James/c-term-timer/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/W-A-James/c-term-timer/actions/workflows/c-cpp.yml)
 
-A port of [term-timer]((https://github.com/W-A-James/term-timer). Originally written in Typescript for use with Node.js.
+A port of [term-timer](https://github.com/W-A-James/term-timer). Originally written in Typescript for use with Node.js.
 This port was written to give a more responsive terminal experience. This port currently only supports unix-like systems and is currently only tested on an x86 Ubuntu 22.04 machine.
 
 Uses sounds from this [sound
